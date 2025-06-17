@@ -1,10 +1,11 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
-      <div className="text-3xl text-red-500">App</div>
-    </>
+    <div>
+      Hello
+    </div>
   );
 };
 
