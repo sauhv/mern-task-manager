@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyTask = () => {
+const MyTasks = () => {
   return (
     <div>
       <h1>My Task</h1>
@@ -8,4 +8,4 @@ const MyTask = () => {
   );
 };
 
-export default MyTask;
+export default MyTasks;
