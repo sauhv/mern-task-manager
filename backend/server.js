@@ -3,13 +3,14 @@ const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors"); // package để xử lý cors
 const path = require("path"); // Path để xử lý đường dẫn
-const app = express();
 
-// import
+// import routes
 const authRoute = require("./Routes/authRoute");
 const userRoute = require("./Routes/userRoute");
 const taskRoute = require("./Routes/taskRoute");
 const reportRoute = require("./Routes/reportRoute");
+
+const app = express();
 
 // Middleware to handle CORS
 app.use(
@@ -27,11 +28,11 @@ connectDB();
 app.use(express.json()); // Middleware để parse JSON (nếu form gửi dữ liệu JSON)
 app.use(express.urlencoded({ extended: true })); // Use req.body - Middleware để parse dữ liệu form
 
-// Routes
+// Use Routes
 app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
-app.use("/api/task", taskRoute);
-app.use("/api/reports", reportRoute);
+// app.use("/api/users", userRoute);
+// app.use("/api/task", taskRoute);
+// app.use("/api/reports", reportRoute);
 
 // Start server
 const PORT = process.env.PORT || 3001;
