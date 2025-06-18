@@ -1,0 +1,38 @@
+require("dotenv").config(); // package đọc biến từ .env
+const express = require("express");
+const connectDB = require("./config/db");
+const cors = require("cors"); // package để xử lý cors
+const path = require("path"); // Path để xử lý đường dẫn
+const app = express();
+
+// import
+const authRoute = require("./Routes/authRoute");
+const userRoute = require("./Routes/userRoute");
+const taskRoute = require("./Routes/taskRoute");
+const reportRoute = require("./Routes/reportRoute");
+
+// Middleware to handle CORS
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Connect to Database
+connectDB();
+
+// Config để lấy dữ liệu từ form
+app.use(express.json()); // Middleware để parse JSON (nếu form gửi dữ liệu JSON)
+app.use(express.urlencoded({ extended: true })); // Use req.body - Middleware để parse dữ liệu form
+
+// Routes
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/task", taskRoute);
+app.use("/api/reports", reportRoute);
+
+// Start server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
