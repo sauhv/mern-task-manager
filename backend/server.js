@@ -29,6 +29,9 @@ app.use(express.json()); // Middleware để parse JSON (nếu form gửi dữ l
 app.use(express.urlencoded({ extended: true })); // Use req.body - Middleware để parse dữ liệu form
 
 // Use Routes
+app.get("/", (req, res) => {
+  res.send("Task Manager Project");
+});
 app.use("/api/auth", authRoute);
 // app.use("/api/users", userRoute);
 // app.use("/api/task", taskRoute);
