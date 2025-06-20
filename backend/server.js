@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   res.send("Task Manager Project");
 });
 app.use("/api/auth", authRoute);
-// app.use("/api/users", userRoute);
+app.use("/api/users", userRoute);
 // app.use("/api/task", taskRoute);
 // app.use("/api/reports", reportRoute);
 
