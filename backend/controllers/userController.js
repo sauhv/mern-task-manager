@@ -55,7 +55,7 @@ const getUserById = async (req, res) => {
 };
 
 // @desc   Delete a user (Admin only)
-// @route  GET /api/users/:id
+// @route  DELTE /api/users/:id
 // @access Private (Admin)
 const deleteUser = async (req, res) => {
   try {

@@ -5,10 +5,10 @@ const cors = require("cors"); // package để xử lý cors
 const path = require("path"); // Path để xử lý đường dẫn
 
 // import routes
-const authRoute = require("./Routes/authRoute");
-const userRoute = require("./Routes/userRoute");
-const taskRoute = require("./Routes/taskRoute");
-const reportRoute = require("./Routes/reportRoute");
+const authRoute = require("./Routes/authRoutes");
+const userRoute = require("./Routes/userRoutes");
+const taskRoute = require("./Routes/taskRoutes");
+const reportRoute = require("./Routes/reportRoutes");
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-// app.use("/api/task", taskRoute);
+app.use("/api/tasks", taskRoute);
 // app.use("/api/reports", reportRoute);
 
 // Start server

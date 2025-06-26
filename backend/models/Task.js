@@ -7,17 +7,17 @@ const todoSchema = new mongoose.Schema({
 
 const TaskSchema = new mongoose.Schema(
   {
-    tile: { type: String, required: true },
+    title: { type: String, required: true },
     description: { type: String },
     priority: {
       type: String,
-      enum: ["low", "medium", "high"],
-      default: "medium",
+      enum: ["Low", "Medium", "High"],
+      default: "Medium",
     },
     status: {
       type: String,
-      enum: ["pending", "In Progress", "completed"],
-      default: "pending",
+      enum: ["Pending", "In Progress", "Completed"],
+      default: "Pending",
     },
     dueDate: { type: Date, required: true },
     assignedTo: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
