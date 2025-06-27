@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/tasks", taskRoute);
-// app.use("/api/reports", reportRoute);
+app.use("/api/reports", reportRoute);
 
 // Start server
 const PORT = process.env.PORT || 3001;
