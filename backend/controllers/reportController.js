@@ -1,5 +1,5 @@
-const Task = require("../models/taskModel");
-const User = require("../models/userModel");
+const Task = require("../models/Task");
+const User = require("../models/User");
 const excelJS = require("exceljs");
 
 // @desc   Export all tasks as an Excel file
