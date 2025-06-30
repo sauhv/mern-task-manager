@@ -1,11 +1,11 @@
 import React from "react";
 
 const UserDashboard = () => {
-    return (
-        <div>
-            <h1>User Dashboard</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>User Dashboard1</h1>
+    </div>
+  );
+};
 
 export default UserDashboard;
