@@ -7,7 +7,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    console.log(event.target.files);
+    
     if (file) {
       // Update the imgae state
       setImage(file);

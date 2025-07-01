@@ -37,6 +37,9 @@ app.use("/api/users", userRoute);
 app.use("/api/tasks", taskRoute);
 app.use("/api/reports", reportRoute);
 
+// Server upload folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

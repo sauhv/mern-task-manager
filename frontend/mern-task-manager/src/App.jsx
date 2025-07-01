@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import Signup from "./pages/Auth/SignUp";
 import Dashboard from "./pages/Admin/Dashboard";
 import ManagerTasks from "./pages/Admin/ManagerTasks";
 import CreateTask from "./pages/Admin/CreateTask";
