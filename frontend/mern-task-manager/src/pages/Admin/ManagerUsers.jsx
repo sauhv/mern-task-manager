@@ -1,11 +1,8 @@
 import React from "react";
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 const ManagerUsers = () => {
-    return (
-        <div>
-            <h1>Manager Users</h1>
-        </div>
-    )
-}
+  return <DashboardLayout activeMenu="Manager User">hello</DashboardLayout>;
+};
 
 export default ManagerUsers;
