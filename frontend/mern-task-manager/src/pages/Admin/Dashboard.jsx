@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import moment from "moment";
+import { addThousandSeparator } from "../../utils/helper";
+import InfoCard from "../../components/Card/InfoCard";
+import { LuArrowRight } from "react-icons/lu";
+import TaskListTable from "../../components/TaskListTable";
+import CustomPieChart from "../../components/Charts/CustomPieChart";
 
 const Dashboard = () => {
   useUserAuth();
@@ -15,9 +20,32 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const [dashboardData, setDashboardData] = useState(null);
-  // const [pieChartData, setPieChartData] = useState([]);
-  // const [barChartData, setBarChartData] = useState([]);
+  const [pieChartData, setPieChartData] = useState([]);
+  const [barChartData, setBarChartData] = useState([]);
   const [greeting, setGreeting] = useState("");
+
+  const COLORS = ["#8D51FF", "#00B8DB", "#7BCE00"];
+
+  // Prepare Chart Data
+  const prepareChartData = (data) => {
+    const taskDistribution = data?.taskDistribution || null;
+    const taskPriorityLevels = data?.taskPriorityLevels || null;
+
+    const taskDistributionData = [
+      { status: "Pending", count: taskDistribution?.Pending || 0 },
+      { status: "InProgress", count: taskDistribution?.InProgress || 0 },
+      { status: "Completed", count: taskDistribution?.Completed || 0 },
+      { status: "All", count: taskDistribution?.All || 0 },
+    ];
+    setPieChartData(taskDistributionData);
+
+    const taskPriorityLevelsData = [
+      { status: "Low", count: taskDistribution?.Low || 0 },
+      { status: "Medium", count: taskDistribution?.Medium || 0 },
+      { status: "High", count: taskDistribution?.High || 0 },
+    ];
+    setBarChartData(taskPriorityLevelsData);
+  };
 
   const getDashboardData = async () => {
     try {
@@ -27,6 +55,7 @@ const Dashboard = () => {
 
       if (response.data) {
         setDashboardData(response.data);
+        prepareChartData(response.data?.charts || null);
       }
     } catch (error) {
       console.error("Error fetching users: ", error);
@@ -45,9 +74,14 @@ const Dashboard = () => {
     }
   };
 
+  const onSeeMore = () => {
+    navigate("/admin/tasks");
+  };
+
   useEffect(() => {
     getDashboardData();
     updateGreeting();
+
     const interval = setInterval(updateGreeting, 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -63,6 +97,64 @@ const Dashboard = () => {
             <p className="text-xs md:text-[13px] text-gray-400 mt-1.5">
               {moment().format("dddd Do MMM YYYY")}
             </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mt-5">
+          <InfoCard
+            label="Total Tasks"
+            value={addThousandSeparator(
+              dashboardData?.charts?.taskDistribution?.All || 0
+            )}
+            color="bg-primary"
+          />
+
+          <InfoCard
+            label="Pending Tasks"
+            value={addThousandSeparator(
+              dashboardData?.charts?.taskDistribution?.Pending || 0
+            )}
+            color="bg-yellow-500"
+          />
+
+          <InfoCard
+            label="In Progress Tasks"
+            value={addThousandSeparator(
+              dashboardData?.charts?.taskDistribution?.InProgress || 0
+            )}
+            color="bg-cyan-500"
+          />
+
+          <InfoCard
+            label="Completed Tasks"
+            value={addThousandSeparator(
+              dashboardData?.charts?.taskDistribution?.Completed || 0
+            )}
+            color="bg-green-500"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
+        <div className="">
+          <div className="card">
+            <div className="flex items-center justify-between">
+              <h5 className="text-medium">Task Distribute</h5>
+            </div>
+
+            <CustomPieChart data={pieChartData} colors={COLORS} />
+          </div>
+        </div>
+
+        <div className="md:col-span-2">
+          <div className="card">
+            <div className="flex items-center justify-between">
+              <h5 className="text-lg">Recent Tasks</h5>
+
+              <button className="card-btn" onClick={onSeeMore}>
+                See All <LuArrowRight className="text-base" />
+              </button>
+            </div>
+
+            <TaskListTable tableData={dashboardData?.recentTasks || []} />
           </div>
         </div>
       </div>
