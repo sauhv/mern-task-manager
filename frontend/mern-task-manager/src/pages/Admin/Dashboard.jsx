@@ -11,6 +11,7 @@ import InfoCard from "../../components/Card/InfoCard";
 import { LuArrowRight } from "react-icons/lu";
 import TaskListTable from "../../components/TaskListTable";
 import CustomPieChart from "../../components/Charts/CustomPieChart";
+import CustomBarChart from "../../components/Charts/CustomBarChart";
 
 const Dashboard = () => {
   useUserAuth();
@@ -24,7 +25,7 @@ const Dashboard = () => {
   const [barChartData, setBarChartData] = useState([]);
   const [greeting, setGreeting] = useState("");
 
-  const COLORS = ["#8D51FF", "#00B8DB", "#7BCE00"];
+  const COLORS = ["#eab308", "#00B8DB", "#22c55e"];
 
   // Prepare Chart Data
   const prepareChartData = (data) => {
@@ -33,16 +34,15 @@ const Dashboard = () => {
 
     const taskDistributionData = [
       { status: "Pending", count: taskDistribution?.Pending || 0 },
-      { status: "InProgress", count: taskDistribution?.InProgress || 0 },
+      { status: "In Progress", count: taskDistribution?.InProgress || 0 },
       { status: "Completed", count: taskDistribution?.Completed || 0 },
-      { status: "All", count: taskDistribution?.All || 0 },
     ];
     setPieChartData(taskDistributionData);
 
     const taskPriorityLevelsData = [
-      { status: "Low", count: taskDistribution?.Low || 0 },
-      { status: "Medium", count: taskDistribution?.Medium || 0 },
-      { status: "High", count: taskDistribution?.High || 0 },
+      { priority: "Low", count: taskPriorityLevels?.Low || 0 },
+      { priority: "Medium", count: taskPriorityLevels?.Medium || 0 },
+      { priority: "High", count: taskPriorityLevels?.High || 0 },
     ];
     setBarChartData(taskPriorityLevelsData);
   };
@@ -133,14 +133,25 @@ const Dashboard = () => {
           />
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
-        <div className="">
+        <div>
           <div className="card">
             <div className="flex items-center justify-between">
               <h5 className="text-medium">Task Distribute</h5>
             </div>
 
             <CustomPieChart data={pieChartData} colors={COLORS} />
+          </div>
+        </div>
+
+        <div>
+          <div className="card">
+            <div className="flex items-center justify-between">
+              <h5 className="text-medium">Task Priority</h5>
+            </div>
+
+            <CustomBarChart data={barChartData} />
           </div>
         </div>
 
