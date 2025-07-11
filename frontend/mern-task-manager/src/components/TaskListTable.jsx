@@ -49,7 +49,7 @@ const TaskListTable = ({ tableData }) => {
         </thead>
         <tbody>
           {tableData.map((task) => (
-            <tr key="task._id" className="border-t border-gray-200">
+            <tr key={task._id} className="border-t border-gray-200">
               <td
                 title={task.title}
                 className="my-3 mx-4 text-gray-700 text-[13px] line-clamp-1 overflow-hidden"

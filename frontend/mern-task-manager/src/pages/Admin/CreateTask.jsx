@@ -22,7 +22,7 @@ const CreateTask = () => {
     description: "",
     priority: "Low",
     dueDate: null,
-    asssignedTo: [],
+    assignedTo: [],
     todoChecklist: [],
     attachments: [],
   });
@@ -45,14 +45,36 @@ const CreateTask = () => {
       description: "",
       priority: "Low",
       dueDate: null,
-      asssignedTo: [],
+      assignedTo: [],
       todoChecklist: [],
       attachments: [],
     });
   };
 
   // Create Task
-  const createTask = async () => {};
+  const createTask = async () => {
+    setLoading(true);
+    try {
+      const todolist = taskData.todoChecklist?.map((item) => ({
+        text: item,
+        completed: false,
+      }));
+
+      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+        ...taskData,
+        dueDate: new Date(taskData.dueDate).toISOString(),
+        todoChecklist: todolist,
+      });
+
+      toast.success("Task Created Successfully");
+      clearData();
+    } catch (error) {
+      console.error("Error creating task: ", error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Update Task
   const updateTask = async () => {};
@@ -76,7 +98,7 @@ const CreateTask = () => {
       return;
     }
 
-    if (taskData.asssignedTo?.length === 0) {
+    if (taskData.assignedTo?.length === 0) {
       setError("Add atleast one todo task");
       return;
     }
@@ -181,9 +203,9 @@ const CreateTask = () => {
                 </label>
 
                 <SelectUsers
-                  selectedUsers={taskData.asssignedTo}
+                  selectedUsers={taskData.assignedTo}
                   setSelectedUsers={(value) => {
-                    handleValueChange("asssignedTo", value);
+                    handleValueChange("assignedTo", value);
                   }}
                 />
               </div>
@@ -203,7 +225,9 @@ const CreateTask = () => {
             </div>
 
             <div className="mt-3">
-              <label>Add Attachments</label>
+              <label className="text-xs font-medium text-slate-600">
+                Add Attachments
+              </label>
 
               <AddAttachmentsInput
                 attachments={taskData?.attachments}

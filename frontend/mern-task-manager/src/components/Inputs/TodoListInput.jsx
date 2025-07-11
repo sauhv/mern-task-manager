@@ -6,8 +6,6 @@ const TodoListInput = ({ todoList, setTodoList }) => {
   // Function to handle adding an option
   const handleAddOption = () => {
     if (option.trim()) {
-      console.log(option);
-
       setTodoList([...todoList, option]);
       setOption("");
     }
@@ -18,7 +16,6 @@ const TodoListInput = ({ todoList, setTodoList }) => {
     const updateArr = todoList.filter((_, idx) => idx !== index);
     setTodoList(updateArr);
   };
-  console.log("todoList: ", todoList);
 
   return (
     <div>
