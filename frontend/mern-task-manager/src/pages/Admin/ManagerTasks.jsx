@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import TaskStatusTabs from "../../components/TaskStatusTabs";
+import TaskCard from "../../components/Card/TaskCard";
 
 const ManagerTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -84,6 +85,27 @@ const ManagerTasks = () => {
               </button>
             </div>
           )}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {allTasks.map((item, index) => (
+            <TaskCard
+              key={item._id}
+              title={item.name}
+              description={item.description}
+              priority={item.priority}
+              status={item.status}
+              progress={item.progress}
+              createAt={item.createAt}
+              dueDate={item.dueDate}
+              assignedTo={item.assignedTo?.map((item) => item.profileImageUrl)}
+              attachmentCount={item.attachments?.length || 0}
+              completedTodoCount={item.completedTodoCount || 0}
+              todoChecklist={item.todoChecklist || []}
+              onClick={() => {
+                handleClick(item);
+              }}
+            />
+          ))}
         </div>
       </div>
     </DashboardLayout>

@@ -46,6 +46,9 @@ const TodoListInput = ({ todoList, setTodoList }) => {
           type="text"
           placeholder="Enter Task"
           value={option}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleAddOption();
+          }}
           onChange={({ target }) => setOption(target.value)}
           className="w-full text-[13px] text-black outline-none bg-white border border-gray-100 px-2 py-2 rounded-md"
         />
