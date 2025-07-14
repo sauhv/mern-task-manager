@@ -35,17 +35,19 @@ const SideMenu = ({ activeMenu }) => {
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
         <div className="relative">
           <img
-            src={user?.profileImageUrl || ""}
+            src={user?.profileImageUrl || "/avatar-user.png"}
             alt="Profile Image"
             className="w-20 h-20 bg-slate-400 rounded-full"
           />
         </div>
 
-        {user?.role === "admin" && (
-          <div className="text-[10px] bg-primary text-white p-3 py-0.5 rounded mt-1">
-            Admin
-          </div>
-        )}
+        <div
+          className={`text-[10px] ${
+            user?.role === "admin" ? "bg-primary" : "bg-green-800"
+          } text-white p-3 py-0.5 rounded mt-1`}
+        >
+          {user?.role === "admin" ? "Admin" : "Member"}
+        </div>
 
         <h5 className="text-gray-950 font-medium mt-3 leading-6">
           {user?.name || ""}
