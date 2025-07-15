@@ -67,7 +67,7 @@ const TaskCard = ({
             : "border-violet-500"
         }`}
       >
-        <p className="text-xs font-medium text-gray-800 mt-4 line-clamp-2">
+        <p className="text-[13px] font-semibold text-gray-800 mt-4 line-clamp-2">
           {title}
         </p>
 

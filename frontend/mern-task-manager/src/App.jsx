@@ -20,8 +20,10 @@ import ViewTaskDetails from "./pages/Users/ViewTaskDetails";
 import PrivateRoute from "./Routes/PrivateRoute";
 import UserProvider, { UserContext } from "./context/userContext";
 import { Toaster } from "react-hot-toast";
+import Skeleton from "react-loading-skeleton";
 
 const App = () => {
+  <Skeleton count={5} />;
   return (
     <UserProvider>
       <div>
@@ -43,7 +45,7 @@ const App = () => {
               <Route path="/user/dashboard" element={<UserDashboard />} />
               <Route path="/user/tasks" element={<MyTasks />} />
               <Route
-                path="/user/tasks-details/:id"
+                path="/user/task-details/:id"
                 element={<ViewTaskDetails />}
               />
             </Route>
