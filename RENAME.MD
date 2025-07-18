@@ -21,7 +21,6 @@ Dự án này cung cấp một API đơn giản sử dụng Node.js và Express 
 | `dotenv`        | Đọc biến môi trường từ file `.env` |
 | `multer`        | Xử lý file upload (multipart/form-data) |
 | `fs`, `path`    | Xử lý đường dẫn và đổi tên file |
-| *(Tùy chọn mở rộng)* | |
 | `jsonwebtoken`  | Xác thực bằng token JWT |
 | `bcryptjs`      | Mã hóa mật khẩu |
 | `mongoose`      | Kết nối MongoDB |
@@ -68,14 +67,8 @@ node rename.js
 | Field     | Mô tả |
 |-----------|------|
 | `myfile`  | File cần upload |
-| `newName` | Tên mới cho file (không cần phần mở rộng) |
+| `newName` | Tên mới cho file + date |
 
-### Ví dụ:
-
-- File upload: `avatar.png`
-- newName: `user_001`
-
-Server sẽ lưu file thành: `uploads/user_001.png`
 
 ---
 
@@ -86,20 +79,10 @@ project-root/
 ├── uploads/        # Nơi lưu file upload
 ├── rename.js       # Script xử lý upload & rename
 ├── .env            # Biến môi trường
-└── rename.md       # Hướng dẫn sử dụng
+└── rename.md       
 ```
 
 ---
 
-## 🛠 Mở rộng gợi ý
-
-- ✅ Thêm bảo mật JWT trước khi cho phép upload
-- ✅ Ghi log file upload vào MongoDB
-- ✅ Export danh sách file ra Excel (`exceljs`)
-
----
-
 ## 👨‍💻 Tác giả
-
-Huỳnh Văn Sáu  
-[GitHub](https://github.com/) • [LinkedIn](https://linkedin.com/) *(thêm link nếu cần)*
+[GitHub](https://github.com/sauhv) • 
